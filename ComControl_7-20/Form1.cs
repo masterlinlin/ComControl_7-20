@@ -528,21 +528,32 @@ namespace ComControl_7_20
 
             //serialPort1.DiscardInBuffer();
             //serialPort1.DiscardOutBuffer();
-            KeepStatus();
-            KeepStatus();//维持器件之前状态不会改变的方法
-            string OpenNumber = DeviceOpenNumber(18);//单控开关的 打开指定器件方法
-                                                     //再次下发指令时，仅为单控开关的指令
-            serialPort1.DiscardInBuffer();
-            string command = CRCForModbus(OpenNumber); //CRC校验数据结果  
-            string commanded = command + "CC";//完整通讯指令合成
-            byte[] byteArray2 = strToHexByte1(commanded);
-            serialPort1.Write(byteArray2, 0, 8);
-            //  byte[] buff = new byte[] { 0XAA,0X08,0X02,0X00,0X01,0X5E,0X78,0XCC };//仅打开1-2
-            // serialPort1.Write(buff, 0, 8);
-            //serialPort1.DiscardInBuffer();
-            //serialPort1.DiscardOutBuffer();
-            ovalShape11.FillColor = Color.Green;
-        
+            try
+            {
+               
+              //  KeepStatus();
+                KeepStatus();//维持器件之前状态不会改变的方法
+                string OpenNumber = DeviceOpenNumber(18);//单控开关的 打开指定器件方法
+                                                         //再次下发指令时，仅为单控开关的指令
+                serialPort1.DiscardInBuffer();
+                string command = CRCForModbus(OpenNumber); //CRC校验数据结果  
+                string commanded = command + "CC";//完整通讯指令合成
+                byte[] byteArray2 = strToHexByte1(commanded);
+                serialPort1.Write(byteArray2, 0, 8);
+                //  byte[] buff = new byte[] { 0XAA,0X08,0X02,0X00,0X01,0X5E,0X78,0XCC };//仅打开1-2
+                // serialPort1.Write(buff, 0, 8);
+                //serialPort1.DiscardInBuffer();
+                //serialPort1.DiscardOutBuffer();
+                
+                ovalShape11.FillColor = Color.Green;
+
+            }
+            catch (Exception E)
+            {
+                ovalShape11.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+      
 
          
 
@@ -551,15 +562,25 @@ namespace ComControl_7_20
 
         private void button2_Click(object sender, EventArgs e)//器件1关
         {
-            KeepStatus();
-            string CloseNumber = DeviceCloseNumber(18);//单控开关的 打开指定器件方法
-                                                       //再次下发指令时，仅为单控开关的指令
-            serialPort1.DiscardInBuffer();
-            string command = CRCForModbus(CloseNumber); //CRC校验数据结果  
-            string commanded = command + "CC";//完整通讯指令合成
-            byte[] byteArray2 = strToHexByte1(commanded);
-            serialPort1.Write(byteArray2, 0, 8);
-            ovalShape11.FillColor = Color.Red;
+            try
+            {
+                KeepStatus();
+                string CloseNumber = DeviceCloseNumber(18);//单控开关的 打开指定器件方法
+                                                           //再次下发指令时，仅为单控开关的指令
+                serialPort1.DiscardInBuffer();
+                string command = CRCForModbus(CloseNumber); //CRC校验数据结果  
+                string commanded = command + "CC";//完整通讯指令合成
+                byte[] byteArray2 = strToHexByte1(commanded);
+                serialPort1.Write(byteArray2, 0, 8);
+                ovalShape11.FillColor = Color.Red;
+            }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+
+           
 
 
         }
@@ -576,6 +597,10 @@ namespace ComControl_7_20
 
         private void button3_Click(object sender, EventArgs e)//器件2开
         {
+            try
+            {
+
+           
             KeepStatus();//维持器件之前状态不会改变的方法
              string OpenNumber= DeviceOpenNumber(17);//单控开关的 打开指定器件方法
              //再次下发指令时，仅为单控开关的指令
@@ -589,10 +614,22 @@ namespace ComControl_7_20
             //serialPort1.Write(buff, 0, 8);
             //ovalShape11.FillColor = Color.Green;
             // WriteByteToSerialPort(DeviceOpen2);
+
+
         }
+            catch (Exception E)
+            {
+                ovalShape12.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button4_Click(object sender, EventArgs e)//器件2关
         {
+            try
+            {
+
+           
             //WriteByteToSerialPort(DeviceClose2);
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(17);//单控开关的 打开指定器件方法
@@ -603,10 +640,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape12.FillColor = Color.Red;
+            }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+
         }
 
         private void button5_Click(object sender, EventArgs e)//器件3开
         {
+            try
+            {
+
+          
             // WriteByteToSerialPort(DeviceOpen3);
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(16);//单控开关的 打开指定器件方法
@@ -617,14 +665,25 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape13.FillColor = Color.Green;
-            //byte[] buff = new byte[] { 0XAA, 0X08, 0X02, 0X00, 0X21, 0X5F, 0XA0, 0XCC };//仅打开6
-            //serialPort1.Write(buff, 0, 8);
-            //ovalShape13.FillColor = Color.Green;
+                //byte[] buff = new byte[] { 0XAA, 0X08, 0X02, 0X00, 0X21, 0X5F, 0XA0, 0XCC };//仅打开6
+                //serialPort1.Write(buff, 0, 8);
+                //ovalShape13.FillColor = Color.Green;
+            }
+            catch (Exception E)
+            {
+                ovalShape13.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
 
         }
 
         private void button6_Click(object sender, EventArgs e)//器件3关
         {
+
+            try
+            {
+
+           
             // WriteByteToSerialPort(DeviceClose3);
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(16);//单控开关的 打开指定器件方法
@@ -635,11 +694,22 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape13.FillColor = Color.Red;
+            }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
 
         }
 
         private void button7_Click(object sender, EventArgs e)//器件4开
         {
+            try
+            {
+
+          
+
             //WriteByteToSerialPort(DeviceOpen4);
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(15);//单控开关的 打开指定器件方法
@@ -649,10 +719,15 @@ namespace ComControl_7_20
             string commanded = command + "CC";//完整通讯指令合成
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
-            ovalShape12.FillColor = Color.Green;
             //byte[] buff = new byte[] { 0XAA, 0X08, 0X02, 0X00, 0X19, 0X5E, 0X72, 0XCC };//仅打开4-5
             //serialPort1.Write(buff, 0, 8);
             ovalShape14.FillColor = Color.Green;
+            }
+            catch (Exception E)
+            {
+                ovalShape14.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
 
 
         }
@@ -660,6 +735,11 @@ namespace ComControl_7_20
         private void button8_Click(object sender, EventArgs e)//器件4关
         {
             // WriteByteToSerialPort(DeviceClose4);
+
+            try
+            {
+
+           
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(15);//单控开关的 打开指定器件方法
                                                       //再次下发指令时，仅为单控开关的指令
@@ -669,6 +749,12 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape14.FillColor = Color.Red;
+            }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
 
         }
 
@@ -677,7 +763,10 @@ namespace ComControl_7_20
             //  WriteByteToSerialPort(DeviceOpen5);
             //byte[] buff = new byte[] { 0XAA, 0X08, 0X02, 0X00, 0X09, 0X5F, 0XBE, 0XCC };//仅打开4-5
             //serialPort1.Write(buff, 0, 8);
-          
+            try
+            {
+
+           
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(13);//单控开关的 打开指定器件方法
                                                     //再次下发指令时，仅为单控开关的指令
@@ -687,12 +776,23 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape15.FillColor = Color.Green;
+            }
+            catch (Exception E)
+            {
+                ovalShape15.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
 
         }
 
         private void button10_Click(object sender, EventArgs e)//器件5关
         {
             // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+           
+
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(13);//单控开关的 打开指定器件方法
                                                       //再次下发指令时，仅为单控开关的指令
@@ -702,11 +802,22 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape15.FillColor = Color.Red;
+            }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
 
         }
 
         private void button11_Click(object sender, EventArgs e)//器件6开
         {
+
+            try
+            {
+
+           
             // WriteByteToSerialPort(DeviceClose5);
             KeepStatus();
             KeepStatus();//维持器件之前状态不会改变的方法
@@ -718,11 +829,22 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape16.FillColor = Color.Green;
+            }
+            catch (Exception E)
+            {
+                ovalShape16.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
 
         }
 
         private void button12_Click(object sender, EventArgs e)//器件6关
         {
+
+            try
+            {
+
+            
             // WriteByteToSerialPort(DeviceClose5);
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(12);//单控开关的 打开指定器件方法
@@ -733,28 +855,49 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape16.FillColor = Color.Red;
+            }
+            catch (Exception E)
+            {
 
+                MessageBox.Show(E.ToString());
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)//器件7开
         {
-            // WriteByteToSerialPort(DeviceClose5);
-            KeepStatus();
-            KeepStatus();//维持器件之前状态不会改变的方法
-            string OpenNumber = DeviceOpenNumber(11);//单控开关的 打开指定器件方法
-                                                    //再次下发指令时，仅为单控开关的指令
-            serialPort1.DiscardInBuffer();
-            string command = CRCForModbus(OpenNumber); //CRC校验数据结果  
-            string commanded = command + "CC";//完整通讯指令合成
-            byte[] byteArray2 = strToHexByte1(commanded);
-            serialPort1.Write(byteArray2, 0, 8);
-            ovalShape17.FillColor = Color.Green;
+            try
+            {
+
+
+                // WriteByteToSerialPort(DeviceClose5);
+                KeepStatus();
+                KeepStatus();//维持器件之前状态不会改变的方法
+                string OpenNumber = DeviceOpenNumber(11);//单控开关的 打开指定器件方法
+                                                         //再次下发指令时，仅为单控开关的指令
+                serialPort1.DiscardInBuffer();
+                string command = CRCForModbus(OpenNumber); //CRC校验数据结果  
+                string commanded = command + "CC";//完整通讯指令合成
+                byte[] byteArray2 = strToHexByte1(commanded);
+                serialPort1.Write(byteArray2, 0, 8);
+                ovalShape17.FillColor = Color.Green;
+            }
+            catch (Exception E)
+            {
+                ovalShape17.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
 
         }
 
         private void button14_Click(object sender, EventArgs e)//器件7关
         {
             // WriteByteToSerialPort(DeviceClose5);
+
+            try
+            {
+
+           
+          
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(11);//单控开关的 打开指定器件方法
                                                       //再次下发指令时，仅为单控开关的指令
@@ -764,12 +907,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape17.FillColor = Color.Red;
-
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button17_Click(object sender, EventArgs e)//器件8开
         {
             // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+           
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(10);//单控开关的 打开指定器件方法
                                                     //再次下发指令时，仅为单控开关的指令
@@ -779,13 +931,23 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape18.FillColor = Color.Green;
-
-
         }
+            catch (Exception E)
+            {
+                ovalShape18.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+
+}
 
         private void button18_Click(object sender, EventArgs e)//器件8关
         {
             // WriteByteToSerialPort(DeviceClose5);
+
+            try
+            {
+
+          
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(10);//单控开关的 打开指定器件方法
                                                       //再次下发指令时，仅为单控开关的指令
@@ -795,12 +957,20 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape18.FillColor = Color.Red;
+            }
+            catch (Exception E)
+            {
 
+                MessageBox.Show(E.ToString());
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)//器件9开
         {
             //  WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
           
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(8);//单控开关的 打开指定器件方法
@@ -811,12 +981,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape27.FillColor = Color.Green;
-
         }
+            catch (Exception E)
+            {
+                ovalShape27.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button22_Click(object sender, EventArgs e)//器件9关
         {
             // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+           
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(8);//单控开关的 打开指定器件方法
                                                        //再次下发指令时，仅为单控开关的指令
@@ -826,12 +1005,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape27.FillColor = Color.Red;
-
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button23_Click(object sender, EventArgs e)//器件10开
         {
             //  WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+          
             KeepStatus();
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(7);//单控开关的 打开指定器件方法
@@ -842,12 +1030,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape26.FillColor = Color.Green;
-
         }
+            catch (Exception E)
+            {
+                ovalShape26.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button24_Click(object sender, EventArgs e)//器件10关
         {
             // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+           
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(7);//单控开关的 打开指定器件方法
                                                        //再次下发指令时，仅为单控开关的指令
@@ -857,12 +1054,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape26.FillColor = Color.Red;
-
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button25_Click(object sender, EventArgs e)//器件11开
         {
             // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+           
             KeepStatus();
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(6);//单控开关的 打开指定器件方法
@@ -873,12 +1079,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape25.FillColor = Color.Green;
-
         }
+            catch (Exception E)
+            {
+                ovalShape25.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button26_Click(object sender, EventArgs e)//器件11关
         {
             // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+           
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(6);//单控开关的 打开指定器件方法
                                                        //再次下发指令时，仅为单控开关的指令
@@ -888,12 +1103,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape25.FillColor = Color.Red;
-
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button27_Click(object sender, EventArgs e)//器件12开
         {
             //  WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+           
             KeepStatus();
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(5);//单控开关的 打开指定器件方法
@@ -904,12 +1128,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape24.FillColor = Color.Green;
-
         }
+            catch (Exception E)
+            {
+                ovalShape24.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button28_Click(object sender, EventArgs e)//器件12关
         {
             // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+          
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(5);//单控开关的 打开指定器件方法
                                                        //再次下发指令时，仅为单控开关的指令
@@ -919,13 +1152,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape24.FillColor = Color.Red;
-
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button29_Click(object sender, EventArgs e)//器件13开
         {
             // WriteByteToSerialPort(DeviceClose5);
-         
+            try
+            {
+
+           
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(3);//单控开关的 打开指定器件方法
                                                     //再次下发指令时，仅为单控开关的指令
@@ -936,10 +1177,21 @@ namespace ComControl_7_20
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape23.FillColor = Color.Green;
         }
+            catch (Exception E)
+            {
+                ovalShape23.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button30_Click(object sender, EventArgs e)//器件13关
         {
             // WriteByteToSerialPort(DeviceClose5);
+
+            try
+            {
+
+           
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(3);//单控开关的 打开指定器件方法
                                                        //再次下发指令时，仅为单控开关的指令
@@ -949,7 +1201,12 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape23.FillColor = Color.Red;
+            }
+            catch (Exception E)
+            {
 
+                MessageBox.Show(E.ToString());
+            }
 
 
         }
@@ -957,7 +1214,10 @@ namespace ComControl_7_20
         private void button31_Click(object sender, EventArgs e)//器件14开
         {
             // WriteByteToSerialPort(DeviceClose5);
-           
+            try
+            {
+
+          
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(2);//单控开关的 打开指定器件方法
                                                     //再次下发指令时，仅为单控开关的指令
@@ -967,12 +1227,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape22.FillColor = Color.Green;
-
+            }
+            catch (Exception E)
+            {
+                ovalShape22.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
         }
 
         private void button32_Click(object sender, EventArgs e)//器件14关
         {
             // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+            
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(2);//单控开关的 打开指定器件方法
                                                        //再次下发指令时，仅为单控开关的指令
@@ -982,15 +1251,24 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape22.FillColor = Color.Red;
-
-
-
-
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+
+
+
+}
 
         private void button33_Click(object sender, EventArgs e)//器件15开
         {
             //  WriteByteToSerialPort(DeviceClose5);
+
+            try
+            {
+
            
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(1);//单控开关的 打开指定器件方法
@@ -1001,13 +1279,22 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape21.FillColor = Color.Green;
-
-
         }
+            catch (Exception E)
+            {
+                ovalShape21.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+
+}
 
         private void button34_Click(object sender, EventArgs e)//器件15关
         {
             // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+           
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(1);//单控开关的 打开指定器件方法
                                                        //再次下发指令时，仅为单控开关的指令
@@ -1017,14 +1304,23 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape21.FillColor = Color.Red;
-
-
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+
+}
 
         private void button35_Click(object sender, EventArgs e)//器件16开
         {
             // WriteByteToSerialPort(DeviceClose5);
-         
+
+            try
+            {
+
+           
             KeepStatus();//维持器件之前状态不会改变的方法
             string OpenNumber = DeviceOpenNumber(0);//单控开关的 打开指定器件方法
                                                     //再次下发指令时，仅为单控开关的指令
@@ -1034,12 +1330,21 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape20.FillColor = Color.Green;
-
-
         }
+            catch (Exception E)
+            {
+                ovalShape20.FillColor = Color.Red;
+                MessageBox.Show(E.ToString());
+            }
+
+}
 
         private void button36_Click(object sender, EventArgs e)//器件16关
         { // WriteByteToSerialPort(DeviceClose5);
+            try
+            {
+
+          
             KeepStatus();
             string CloseNumber = DeviceCloseNumber(0);//单控开关的 打开指定器件方法
                                                        //再次下发指令时，仅为单控开关的指令
@@ -1049,11 +1354,20 @@ namespace ComControl_7_20
             byte[] byteArray2 = strToHexByte1(commanded);
             serialPort1.Write(byteArray2, 0, 8);
             ovalShape20.FillColor = Color.Red;
-
-
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+
+}
         private void button20_Click(object sender, EventArgs e)//器件全关
         {
+            try
+            {
+
+          
             string result = CRCForModbus(AllDeviecClose); //CRC校验数据结果
             string resulted = result + "CC";//完整通讯指令合成
             byte[] byteArray = strToHexByte1(resulted);
@@ -1075,13 +1389,24 @@ namespace ComControl_7_20
             ovalShape25.FillColor = Color.Red;
             ovalShape26.FillColor = Color.Red;
             ovalShape27.FillColor = Color.Red;
-            //string Input = KeepStatus();//0000 0000 0000 0000 
+           // string Input = KeepStatus();//0000 0000 0000 0000 
 
-            //textBox1.Text = Input;//返回信息位为上一步操作中信息
+          //  textBox1.Text = Input;//返回信息位为上一步操作中信息
+
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+}
 
         private void button19_Click(object sender, EventArgs e)//器件全开
         {
+            try
+            {
+
+           
             string result = CRCForModbus(AllDeviceOpen); //CRC校验数据结果
             string resulted = result + "CC";//完整通讯指令合成
             byte[] byteArray = strToHexByte1(resulted);
@@ -1104,12 +1429,17 @@ namespace ComControl_7_20
             ovalShape26.FillColor = Color.Green;
             ovalShape27.FillColor = Color.Green;
             //string Input = KeepStatus();//0000 0000 0000 0000 
-                                       
+
             //textBox1.Text = Input;//返回信息位为上一步操作中信息
-
-
-
         }
+            catch (Exception E)
+            {
+
+                MessageBox.Show(E.ToString());
+            }
+
+
+}
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
 
@@ -1131,7 +1461,7 @@ namespace ComControl_7_20
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
+            this.BackColor= SystemColors.Control;
         }
 
         private void label12_Click(object sender, EventArgs e)
@@ -1205,10 +1535,10 @@ namespace ComControl_7_20
                 serialPort1.Write(buffAll, 0, 8);
                 Thread.Sleep(s);
             }
-            catch
+            catch (Exception E)
             {
 
-
+                MessageBox.Show(E.ToString());
             }
         }
 
@@ -1345,25 +1675,38 @@ namespace ComControl_7_20
             return result;
         }
         public string KeepStatus() {  //保持器件状态的方法
-                                  
-            byte[] buffin = new byte[] { 0XAA, 0X08, 0X03, 0X00, 0X00, 0XCE, 0X78, 0XCC };//判断器件状态的通用通讯指令
-            serialPort1.Write(buffin, 0, 8);
-            Thread.Sleep(100);
-            int a = serialPort1.Read(buffer, 0, buffersize);
-            
-            string b = byteToHexStr(buffer);
-           //  textBox1.Text = b;
-           
-            string FunctionNumber = b.Substring(6, 4);//获取到对应状态功能码 
-           // textBox1.Text = FunctionNumber;                                                   
-         //   MessageBox.Show(FunctionNumber);
 
-            string function = HexString2BinString(FunctionNumber);//将十六进制转换为二进制   对应位二进制值已经获取
-          //  MessageBox.Show(function);
+            try
+            {
 
-            return function;
 
-        }
+                byte[] buffin = new byte[] { 0XAA, 0X08, 0X03, 0X00, 0X00, 0XCE, 0X78, 0XCC };//判断器件状态的通用通讯指令
+                serialPort1.Write(buffin, 0, 8);
+                Thread.Sleep(100);
+                int a = serialPort1.Read(buffer, 0, buffersize);
+              
+
+                string b = byteToHexStr(buffer);
+                //  textBox1.Text = b;
+
+                string FunctionNumber = b.Substring(6, 4);//获取到对应状态功能码 
+                                                          // textBox1.Text = FunctionNumber;                                                   
+                                                          //   MessageBox.Show(FunctionNumber);
+
+                string function = HexString2BinString(FunctionNumber);//将十六进制转换为二进制   对应位二进制值已经获取
+                                                                      //  MessageBox.Show(function);
+
+                return function;
+
+            }
+            catch (Exception r)
+            {
+                return null;
+                MessageBox.Show(r.ToString());
+
+            }
+        
+    }
         public string DeviceOpenNumber(int number) {//按照器件的编号替换  指定功能码中 二进制值为 1的方法  指定单开器件
             string F = "F";
             // KeepStatus();
@@ -1599,6 +1942,11 @@ namespace ComControl_7_20
 
 
 
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("cccc");
         }
     }
 }
