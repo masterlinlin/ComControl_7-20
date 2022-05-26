@@ -496,6 +496,8 @@ namespace ComControl_7_20
 
             //4.
             return result;
+
+
         }
         public  void GetStatus() {//判断器件状态的方法
             byte[] buffin = new byte[] { 0XAA, 0X08, 0X03, 0X00, 0X00, 0XCE, 0X78, 0XCC };//判断器件状态的通用通讯指令
